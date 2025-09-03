@@ -7,7 +7,7 @@ export default function Home() {
   const [items, setItems] = useState<number>(0);
   const [price, setPrice] = useState<number>(0);
   const [region, setRegion] = useState<string>("AUK");
-  const [, setCalculatedTotal] = useState<number | null>(null);
+  const [calculatedTotal, setCalculatedTotal] = useState<number | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,6 +64,12 @@ export default function Home() {
           >
             Calculate Price
           </button>
+
+          {calculatedTotal !== null && (
+            <div className="mt-4 text-lg font-semibold">
+              Total Price: ${calculatedTotal.toFixed(2)}
+            </div>
+          )}
         </form>
       </main>
     </div>
