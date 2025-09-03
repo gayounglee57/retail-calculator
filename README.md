@@ -21,6 +21,14 @@ Open http://localhost:3000 with your browser to see the retail calculator.
 
 
 ## Running Tests
+Run the following to run all the tests:
+```bash
+npm run test
+```
 
+Alternatively, you can run the tests in watch mode:
+```bash
+npm run test:watch
+```
 
 
