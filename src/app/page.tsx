@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
 import { NumberInputField } from "./components/NumberInputField";
+import { SelectField } from "./components/SelectField";
 
 export default function Home() {
   const [items, setItems] = useState<number>(0);
   const [price, setPrice] = useState<number>(0);
+  const [region, setRegion] = useState<string>("AUK");
 
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
@@ -27,6 +29,21 @@ export default function Home() {
           min={0}
           step={0.01}
           helpText="Enter the cost of a single item."
+        />
+
+        <SelectField
+          id="region"
+          label="Region"
+          value={region}
+          onChange={setRegion}
+          options={[
+            { value: "AUK", label: "AUK" },
+            { value: "CHC", label: "CHC" },
+            { value: "WAI", label: "WAI" },
+            { value: "WLG", label: "WLG" },
+            { value: "TAS", label: "TAS" },
+          ]}
+          helpText="Select your region."
         />
       </main>
     </div>
