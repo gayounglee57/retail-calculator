@@ -67,7 +67,7 @@ export default function Home() {
           </button>
 
           {calculatedTotal !== null && (
-            <div className="mt-4 text-lg font-semibold">
+            <div className="mt-4 text-lg">
               Total Price: ${calculatedTotal.toFixed(2)}
             </div>
           )}
