@@ -3,6 +3,9 @@ import { useState } from "react";
 import { NumberInputField } from "./components/NumberInputField";
 import { SelectField } from "./components/SelectField";
 
+const MAX_INTEGER = 1_000_000;
+const MIN_INTEGER = 0;
+
 export default function Home() {
   const [items, setItems] = useState<number>(0);
   const [price, setPrice] = useState<number>(0);
@@ -16,7 +19,8 @@ export default function Home() {
           label="Number of Items"
           value={items}
           onChange={setItems}
-          min={0}
+          min={MIN_INTEGER}
+          max={MAX_INTEGER}
           step={1}
           helpText="Enter how many items you want to purchase."
         />
@@ -26,7 +30,8 @@ export default function Home() {
           label="Price per Item"
           value={price}
           onChange={setPrice}
-          min={0}
+          min={MIN_INTEGER}
+          max={MAX_INTEGER}
           step={0.01}
           helpText="Enter the cost of a single item."
         />
