@@ -6,6 +6,7 @@ type NumberInputFieldProps = {
   max?: number;
   step?: number;
   helpText?: string;
+  required?: boolean;
 };
 
 export function NumberInputField({
@@ -16,6 +17,7 @@ export function NumberInputField({
   max = Number.MAX_SAFE_INTEGER,
   step = 1,
   helpText,
+  required = true,
 }: NumberInputFieldProps) {
   return (
     <div className="flex flex-col gap-2">
@@ -31,6 +33,7 @@ export function NumberInputField({
         step={step}
         className="border rounded-lg p-2 w-48"
         aria-describedby={helpText ? `${id}-help` : undefined}
+        required={required}
       />
       {helpText && (
         <span id={`${id}-help`} className="text-xs text-gray-500">
