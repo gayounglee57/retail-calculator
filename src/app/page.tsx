@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { NumberInputField } from "./components/NumberInputField";
 import { SelectField } from "./components/SelectField";
+import { formatCurrency } from "./helpers/util";
 
 export default function Home() {
   const [calculatedTotal, setCalculatedTotal] = useState<number | null>(null);
@@ -69,7 +70,7 @@ export default function Home() {
 
           {calculatedTotal !== null && (
             <div className="mt-4 text-lg font-semibold">
-              Total Price: ${calculatedTotal.toFixed(2)}
+              Total Price: {formatCurrency(calculatedTotal)}
             </div>
           )}
         </form>
