@@ -4,6 +4,14 @@ import { NumberInputField } from "./components/NumberInputField";
 import { SelectField } from "./components/SelectField";
 import { formatCurrency } from "./helpers/util";
 
+const options = [
+  { value: "AUK", label: "AUK" },
+  { value: "CHC", label: "CHC" },
+  { value: "WAI", label: "WAI" },
+  { value: "WLG", label: "WLG" },
+  { value: "TAS", label: "TAS" },
+];
+
 export default function Home() {
   const [calculatedTotal, setCalculatedTotal] = useState<number | null>(null);
 
@@ -45,13 +53,7 @@ export default function Home() {
             id="region"
             name="region"
             label="Region"
-            options={[
-              { value: "AUK", label: "AUK" },
-              { value: "CHC", label: "CHC" },
-              { value: "WAI", label: "WAI" },
-              { value: "WLG", label: "WLG" },
-              { value: "TAS", label: "TAS" },
-            ]}
+            options={options}
             helpText="Select your region."
           />
 
