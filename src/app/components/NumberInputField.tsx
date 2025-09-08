@@ -3,6 +3,7 @@ type NumberInputFieldProps = {
   name: string;
   label: string;
   min?: number;
+  max?: number;
   step?: number;
   helpText?: string;
 };
@@ -12,6 +13,7 @@ export function NumberInputField({
   name,
   label,
   min = 0,
+  max = Number.MAX_SAFE_INTEGER,
   step = 1,
   helpText,
 }: NumberInputFieldProps) {
@@ -25,6 +27,7 @@ export function NumberInputField({
         name={name}
         type="number"
         min={min}
+        max={max}
         step={step}
         className="border rounded-lg p-2 w-48"
         aria-describedby={helpText ? `${id}-help` : undefined}
