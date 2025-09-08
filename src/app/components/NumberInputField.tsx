@@ -1,8 +1,7 @@
 type NumberInputFieldProps = {
   id: string;
+  name: string;
   label: string;
-  value: number;
-  onChange: (value: number) => void;
   min?: number;
   step?: number;
   helpText?: string;
@@ -10,9 +9,8 @@ type NumberInputFieldProps = {
 
 export function NumberInputField({
   id,
+  name,
   label,
-  value,
-  onChange,
   min = 0,
   step = 1,
   helpText,
@@ -24,11 +22,10 @@ export function NumberInputField({
       </label>
       <input
         id={id}
+        name={name}
         type="number"
         min={min}
         step={step}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
         className="border rounded-lg p-2 w-48"
         aria-describedby={helpText ? `${id}-help` : undefined}
       />
