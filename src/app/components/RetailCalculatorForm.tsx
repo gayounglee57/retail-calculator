@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { NumberInputField } from "./NumberInputField";
 import { SelectField } from "./SelectField";
-import { formatCurrency } from "../helpers/util";
+import { currencyFormatter } from "../helpers/util";
 
 export function RetailCalculatorForm() {
   const [calculatedTotal, setCalculatedTotal] = useState<number | null>(null);
@@ -68,7 +68,7 @@ export function RetailCalculatorForm() {
 
       {calculatedTotal !== null && (
         <div className="mt-4 text-lg">
-          Total Price: {formatCurrency(calculatedTotal)}
+          Total Price: {currencyFormatter.format(calculatedTotal)}
         </div>
       )}
     </form>
