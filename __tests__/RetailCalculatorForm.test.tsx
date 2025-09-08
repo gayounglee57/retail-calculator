@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import Home from '../src/app/page'
+import { RetailCalculatorForm } from '@/app/components/RetailCalculatorForm';
 
-describe('Home page', () => {
+describe('RetailCalculatorForm', () => {
   it("renders the calculate button", () => {
-    render(<Home />);
+    render(<RetailCalculatorForm />);
     expect(screen.getByTestId("calculateButton")).toBeInTheDocument();
   });
 
   it("calculates total price when user enters number of items and price per item", async () => {
-    render(<Home />);
+    render(<RetailCalculatorForm />);
 
     const itemsInput = screen.getByLabelText(/number of items/i);
     const priceInput = screen.getByLabelText(/price per item/i);
@@ -31,7 +31,7 @@ describe('Home page', () => {
   });
 
   it("does not calculate total price when a decimal is entered for items", async () => {
-    render(<Home />);
+    render(<RetailCalculatorForm />);
 
     const itemsInput = screen.getByLabelText(/number of items/i);
     const priceInput = screen.getByLabelText(/price per item/i);
