@@ -10,13 +10,6 @@ export default function Home() {
   const [items, setItems] = useState<number>(0);
   const [price, setPrice] = useState<number>(0);
   const [region, setRegion] = useState<string>("AUK");
-  const [, setCalculatedTotal] = useState<number | null>(null);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const total = items * price;
-    setCalculatedTotal(total);
-  };
 
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
@@ -43,29 +36,28 @@ export default function Home() {
           helpText="Enter the cost of a single item."
         />
 
-          <SelectField
-            id="region"
-            label="Region"
-            value={region}
-            onChange={setRegion}
-            options={[
-              { value: "AUK", label: "AUK" },
-              { value: "CHC", label: "CHC" },
-              { value: "WAI", label: "WAI" },
-              { value: "WLG", label: "WLG" },
-              { value: "TAS", label: "TAS" },
-            ]}
-            helpText="Select your region."
-          />
+        <SelectField
+          id="region"
+          label="Region"
+          value={region}
+          onChange={setRegion}
+          options={[
+            { value: "AUK", label: "AUK" },
+            { value: "CHC", label: "CHC" },
+            { value: "WAI", label: "WAI" },
+            { value: "WLG", label: "WLG" },
+            { value: "TAS", label: "TAS" },
+          ]}
+          helpText="Select your region."
+        />
 
-          <button
-            type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
-            aria-label="Calculate final price"
-          >
-            Calculate Price
-          </button>
-        </form>
+        <button
+          type="submit"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+          aria-label="Calculate final price"
+        >
+          Calculate Price
+        </button>
       </main>
     </div>
   );
