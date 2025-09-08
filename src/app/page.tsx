@@ -6,18 +6,13 @@ import { formatCurrency } from "./helpers/util";
 
 export default function Home() {
   const [calculatedTotal, setCalculatedTotal] = useState<number | null>(null);
-  const itemsIdentifier = "items";
-  const priceIdentifier = "price";
-  const regionIdentifier = "region";
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    const entries = Object.fromEntries(formData.entries());
 
-    const items = Number(formData.get(itemsIdentifier));
-    const price = Number(formData.get(priceIdentifier));
-
-    const total = items * price;
+    const total = Number(entries.items) * Number(entries.price);
     setCalculatedTotal(total);
   };
 
@@ -29,8 +24,8 @@ export default function Home() {
           className="flex flex-col gap-6 items-center sm:items-start"
         >
           <NumberInputField
-            id={itemsIdentifier}
-            name={itemsIdentifier}
+            id="items"
+            name="items"
             label="Number of Items"
             min={0}
             step={1}
@@ -38,8 +33,8 @@ export default function Home() {
           />
 
           <NumberInputField
-            id={priceIdentifier}
-            name={priceIdentifier}
+            id="price"
+            name="price"
             label="Price per Item"
             min={0}
             step={0.01}
@@ -47,8 +42,8 @@ export default function Home() {
           />
 
           <SelectField
-            id={regionIdentifier}
-            name={regionIdentifier}
+            id="region"
+            name="region"
             label="Region"
             options={[
               { value: "AUK", label: "AUK" },
