@@ -65,6 +65,13 @@ export function RetailCalculatorForm() {
       >
         Calculate Price
       </button>
+      <button
+        type="reset"
+        className="text-gray-600 underline"
+        onClick={() => setCalculatedTotal(null)}
+      >
+        Reset
+      </button>
 
       {calculatedTotal !== null && (
         <div className="mt-4 text-lg">
