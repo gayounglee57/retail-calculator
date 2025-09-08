@@ -1,20 +1,12 @@
 type SelectFieldProps = {
   id: string;
+  name: string;
   label: string;
-  value: string;
-  onChange: (value: string) => void;
   options: { value: string; label: string }[];
   helpText?: string;
 };
 
-export function SelectField({
-  id,
-  label,
-  value,
-  onChange,
-  options,
-  helpText,
-}: SelectFieldProps) {
+export function SelectField({ id, name, label, options, helpText }: SelectFieldProps) {
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className="text-sm font-medium">
@@ -22,8 +14,7 @@ export function SelectField({
       </label>
       <select
         id={id}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
+        name={name}
         className="border rounded-lg p-2 w-48"
         aria-describedby={helpText ? `${id}-help` : undefined}
       >

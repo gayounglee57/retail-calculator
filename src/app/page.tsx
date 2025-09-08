@@ -4,13 +4,18 @@ import { NumberInputField } from "./components/NumberInputField";
 import { SelectField } from "./components/SelectField";
 
 export default function Home() {
-  const [items, setItems] = useState<number>(0);
-  const [price, setPrice] = useState<number>(0);
-  const [region, setRegion] = useState<string>("AUK");
   const [calculatedTotal, setCalculatedTotal] = useState<number | null>(null);
+  const itemsIdentifier = "items";
+  const priceIdentifier = "price";
+  const regionIdentifier = "region";
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    const items = Number(formData.get(itemsIdentifier));
+    const price = Number(formData.get(priceIdentifier));
+
     const total = items * price;
     setCalculatedTotal(total);
   };
@@ -23,30 +28,27 @@ export default function Home() {
           className="flex flex-col gap-6 items-center sm:items-start"
         >
           <NumberInputField
-            id="items"
+            id={itemsIdentifier}
+            name={itemsIdentifier}
             label="Number of Items"
-            value={items}
-            onChange={setItems}
             min={0}
             step={1}
             helpText="Enter how many items you want to purchase."
           />
 
           <NumberInputField
-            id="price"
+            id={priceIdentifier}
+            name={priceIdentifier}
             label="Price per Item"
-            value={price}
-            onChange={setPrice}
             min={0}
             step={0.01}
             helpText="Enter the cost of a single item."
           />
 
           <SelectField
-            id="region"
+            id={regionIdentifier}
+            name={regionIdentifier}
             label="Region"
-            value={region}
-            onChange={setRegion}
             options={[
               { value: "AUK", label: "AUK" },
               { value: "CHC", label: "CHC" },
