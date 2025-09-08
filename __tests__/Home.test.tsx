@@ -29,4 +29,27 @@ describe('Home page', () => {
     const total = screen.getByText(/total price/i);
     expect(total).toHaveTextContent("Total Price: $59.97");
   });
+
+  it("does not calculate total price when a decimal is entered for items", async () => {
+    render(<Home />);
+
+    const itemsInput = screen.getByLabelText(/number of items/i);
+    const priceInput = screen.getByLabelText(/price per item/i);
+    const submitButton = screen.getByTestId("calculateButton");
+
+    // Enter a decimal for items
+    await userEvent.clear(itemsInput);
+    await userEvent.type(itemsInput, "3.5");
+
+    await userEvent.clear(priceInput);
+    await userEvent.type(priceInput, "19.99");
+
+    // Click submit
+    await userEvent.click(submitButton);
+
+    // Expect that total price is not rendered
+    const total = screen.queryByText(/total price/i);
+    expect(total).not.toBeInTheDocument();
+  });
+
 })
