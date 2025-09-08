@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { NumberInputField } from "./components/NumberInputField";
 import { SelectField } from "./components/SelectField";
-import { formatCurrency } from "./helpers/util";
+import { currencyFormatter } from "./helpers/util";
 
 const options = [
   { value: "AUK", label: "AUK" },
@@ -67,7 +67,7 @@ export default function Home() {
 
           {calculatedTotal !== null && (
             <div className="mt-4 text-lg font-semibold">
-              Total Price: {formatCurrency(calculatedTotal)}
+              Total Price: {currencyFormatter.format(calculatedTotal)}
             </div>
           )}
         </form>
