@@ -2,16 +2,28 @@
 import { useState } from "react";
 import { NumberInputField } from "./components/NumberInputField";
 import { SelectField } from "./components/SelectField";
+import { currencyFormatter } from "./helpers/util";
+
+const options = [
+  { value: "AUK", label: "AUK" },
+  { value: "CHC", label: "CHC" },
+  { value: "WAI", label: "WAI" },
+  { value: "WLG", label: "WLG" },
+  { value: "TAS", label: "TAS" },
+];
+
+const MAX_INTEGER = 1_000_000;
+const MIN_INTEGER = 0;
 
 export default function Home() {
-  const [items, setItems] = useState<number>(0);
-  const [price, setPrice] = useState<number>(0);
-  const [region, setRegion] = useState<string>("AUK");
   const [calculatedTotal, setCalculatedTotal] = useState<number | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const total = items * price;
+    const formData = new FormData(e.currentTarget);
+    const entries = Object.fromEntries(formData.entries());
+
+    const total = Number(entries.items) * Number(entries.priceDollars);
     setCalculatedTotal(total);
   };
 
@@ -22,52 +34,44 @@ export default function Home() {
           onSubmit={handleSubmit}
           className="flex flex-col gap-6 items-center sm:items-start"
         >
-          <NumberInputField
-            id="items"
-            label="Number of Items"
-            value={items}
-            onChange={setItems}
-            min={0}
-            step={1}
-            helpText="Enter how many items you want to purchase."
-          />
+        <NumberInputField
+          id="items"
+          name="items"
+          label="Number of Items"
+          min={MIN_INTEGER}
+          max={MAX_INTEGER}
+          step={1}
+          helpText="Enter how many items you want to purchase."
+        />
 
-          <NumberInputField
-            id="price"
-            label="Price per Item"
-            value={price}
-            onChange={setPrice}
-            min={0}
-            step={0.01}
-            helpText="Enter the cost of a single item."
-          />
+        <NumberInputField
+          id="priceDollars"
+          name="priceDollars"
+          label="Price per Item"
+          min={MIN_INTEGER}
+          max={MAX_INTEGER}
+          step={0.01}
+          helpText="Enter the cost of a single item."
+        />
 
           <SelectField
             id="region"
+            name="region"
             label="Region"
-            value={region}
-            onChange={setRegion}
-            options={[
-              { value: "AUK", label: "AUK" },
-              { value: "CHC", label: "CHC" },
-              { value: "WAI", label: "WAI" },
-              { value: "WLG", label: "WLG" },
-              { value: "TAS", label: "TAS" },
-            ]}
+            options={options}
             helpText="Select your region."
           />
 
           <button
             type="submit"
             className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
-            aria-label="Calculate final price"
           >
             Calculate Price
           </button>
 
           {calculatedTotal !== null && (
             <div className="mt-4 text-lg font-semibold">
-              Total Price: ${calculatedTotal.toFixed(2)}
+              Total Price: {currencyFormatter.format(calculatedTotal)}
             </div>
           )}
         </form>
