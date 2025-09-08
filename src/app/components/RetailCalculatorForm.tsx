@@ -4,56 +4,59 @@ import { NumberInputField } from "./NumberInputField";
 import { SelectField } from "./SelectField";
 import { currencyFormatter } from "../helpers/util";
 
+const options = [
+  { value: "AUK", label: "AUK" },
+  { value: "CHC", label: "CHC" },
+  { value: "WAI", label: "WAI" },
+  { value: "WLG", label: "WLG" },
+  { value: "TAS", label: "TAS" },
+];
+
+const MAX_INTEGER = 1_000_000;
+const MIN_INTEGER = 0;
+
 export function RetailCalculatorForm() {
   const [calculatedTotal, setCalculatedTotal] = useState<number | null>(null);
-  const itemsIdentifier = "items";
-  const priceIdentifier = "price";
-  const regionIdentifier = "region";
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    const entries = Object.fromEntries(formData.entries());
 
-    const items = Number(formData.get(itemsIdentifier));
-    const price = Number(formData.get(priceIdentifier));
-
-    const total = items * price;
+    const total = Number(entries.items) * Number(entries.priceDollars);
     setCalculatedTotal(total);
   };
+
   return (
     <form
       onSubmit={handleSubmit}
       className="flex flex-col gap-6 items-center sm:items-start"
     >
       <NumberInputField
-        id={itemsIdentifier}
-        name={itemsIdentifier}
+        id="items"
+        name="items"
         label="Number of Items"
-        min={0}
+        min={MIN_INTEGER}
+        max={MAX_INTEGER}
         step={1}
         helpText="Enter how many items you want to purchase."
       />
 
       <NumberInputField
-        id={priceIdentifier}
-        name={priceIdentifier}
+        id="priceDollars"
+        name="priceDollars"
         label="Price per Item"
-        min={0}
+        min={MIN_INTEGER}
+        max={MAX_INTEGER}
         step={0.01}
         helpText="Enter the cost of a single item."
       />
 
       <SelectField
-        id={regionIdentifier}
-        name={regionIdentifier}
+        id="region"
+        name="region"
         label="Region"
-        options={[
-          { value: "AUK", label: "AUK" },
-          { value: "CHC", label: "CHC" },
-          { value: "WAI", label: "WAI" },
-          { value: "WLG", label: "WLG" },
-          { value: "TAS", label: "TAS" },
-        ]}
+        options={options}
         helpText="Select your region."
       />
 
