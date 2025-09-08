@@ -5,13 +5,13 @@ This is a retail calculator that calculates the retail price of a product based 
 
 ## Getting Started
 
-First, install the dependencies:
+From the root directory of the project, install the dependencies:
 
 ```bash
 npm install 
 ```
 
-Then run the development server:
+Then run the development server from the same directory:
 
 ```bash
 npm run dev
@@ -21,6 +21,14 @@ Open http://localhost:3000 with your browser to see the retail calculator.
 
 
 ## Running Tests
+Run the following to run all the tests:
+```bash
+npm run test
+```
 
+Alternatively, you can run the tests in watch mode:
+```bash
+npm run test:watch
+```
 
 
