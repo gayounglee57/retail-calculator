@@ -20,7 +20,7 @@ export default function Home() {
     const formData = new FormData(e.currentTarget);
     const entries = Object.fromEntries(formData.entries());
 
-    const total = Number(entries.items) * Number(entries.price);
+    const total = Number(entries.items) * Number(entries.priceDollars);
     setCalculatedTotal(total);
   };
 
@@ -41,8 +41,8 @@ export default function Home() {
           />
 
           <NumberInputField
-            id="price"
-            name="price"
+            id="priceDollars"
+            name="priceDollars"
             label="Price per Item"
             min={0}
             step={0.01}
