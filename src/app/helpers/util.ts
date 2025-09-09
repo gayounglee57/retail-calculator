@@ -38,32 +38,25 @@ export const getTaxAmount = (orderValue: number, region: string): number => {
   }
 };
 
-// const applyDiscount = (orderValue: number) => {
+export const calculateDiscountedPrice = (orderValue: number): string => {
+  const tiers = [0, 1000, 5000, 7000, 10000, 50000, Number.MAX_SAFE_INTEGER]; // tiers define the lower bound of each bracket
+  const rates = [0, 0.03, 0.05, 0.07, 0.1, 0.15]; // progressive discount rates
 
-// };
+  let discountedTotal = 0;
 
-// export const calculateDiscountedPrice = (orderValue: number, index: number) => {
-//   // Example of order $1200
-//   // 1200 - 999 then calculate discount on 201 = discountAmount
-//   // check if remainder is positive
-//   // if negative, then return.
-//   // output should be 1194
-//   // calculateDiscountedPrice(1200, 0);
+  for (let i = 0; i < rates.length; i++) {
+    const lower = tiers[i];
+    const upper = tiers[i + 1];
 
-//   const orderValueTiers = [0, 1000, 5000, 7000, 10000, 50000];
-//   const discountAmounts = [0, 0.03, 0.05, 0.07, 0.1, 0.15];
+    if (orderValue > lower) {
+      const portion = Math.min(orderValue, upper) - lower;
 
-//   const remainder = orderValue - orderValueTiers[index]; // 1200 - 1000 = 200 // 200 - 5000 = -4800
-//   console.log("remainder", remainder);
-//   const discountAmount = remainder * discountAmounts[index]; // 200 * 0.03 // -4800 * 0.05
-//   console.log("discountAmount", discountAmount);
+      // apply discount rate to this portion
+      const discountedPortion = portion * (1 - rates[i]);
+      discountedTotal += discountedPortion;
+    }
+  }
 
-//   if (remainder > 0) {
-//     return calculateDiscountedPrice(remainder, index + 1);
-//   } else {
-//     return {
-//       discountAmount,
-//       remainder,
-//     };
-//   }
-// };
+  return currencyFormatter.format(discountedTotal);
+};
+
