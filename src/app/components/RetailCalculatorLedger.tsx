@@ -1,16 +1,14 @@
 "use client";
+import { HistoryItem } from "../helpers/types";
 import { currencyFormatter } from "../helpers/util";
 
-export type HistoryItem = {
-  calculatedTotal: number;
-  discountAmountDisplay: number;
-  taxAmountDisplay: number;
-  finalPrice: number;
-};
-
-export function RetailCalculatorLedger({ ledgerHistory = [] }: { ledgerHistory: HistoryItem[] }) {
+export function RetailCalculatorLedger({
+  ledgerHistory = [],
+}: {
+  ledgerHistory: HistoryItem[];
+}) {
   return (
-    <table className="w-full border-collapse rounded-xl shadow-md overflow-hidden ml-8">
+    <table className="w-full border-collapse rounded-xl shadow-md overflow-hidden">
       <thead>
         <tr className="bg-gray-100 text-left text-gray-700 text-sm uppercase tracking-wide">
           <th className="px-4 py-3">Sub Total</th>

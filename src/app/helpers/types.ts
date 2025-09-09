@@ -14,3 +14,10 @@ export enum TaxRates {
     WLG = 0.04,
     TAS = 0.0825,
 }
+
+export type HistoryItem = {
+  calculatedTotal: number;
+  discountAmountDisplay: number;
+  taxAmountDisplay: number;
+  finalPrice: number;
+};

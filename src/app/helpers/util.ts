@@ -1,4 +1,4 @@
-import { DiscountAmount, TaxRates } from "./constants";
+import { DiscountAmount, TaxRates } from "./types";
 
 export const currencyFormatter = new Intl.NumberFormat("en-NZ", {
   style: "currency",

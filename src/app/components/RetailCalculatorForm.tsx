@@ -1,5 +1,4 @@
-"use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NumberInputField } from "./NumberInputField";
 import { SelectField } from "./SelectField";
 import {
@@ -7,7 +6,7 @@ import {
   currencyFormatter,
   getTaxAmount,
 } from "../helpers/util";
-import { HistoryItem, RetailCalculatorLedger } from "./RetailCalculatorLedger";
+import { HistoryItem } from "../helpers/types";
 
 const options = [
   { value: "AUK", label: "AUK" },
@@ -20,7 +19,11 @@ const options = [
 const MAX_INTEGER = 1_000_000;
 const MIN_INTEGER = 0;
 
-export function RetailCalculatorForm() {
+export function RetailCalculatorForm({
+  setLedgerHistory,
+}: {
+  setLedgerHistory: (value: React.SetStateAction<HistoryItem[]>) => void;
+}) {
   const [calculatedSubTotal, setCalculatedSubTotal] = useState<number | null>(
     null
   );
@@ -31,13 +34,6 @@ export function RetailCalculatorForm() {
   const [discountAmountDisplay, setDiscountAmountDisplay] = useState<
     number | null
   >(null);
-  const [ledgerHistory, setLedgerHistory] = useState<HistoryItem[]>([]);
-
-  useEffect(() => {
-    setLedgerHistory(
-      JSON.parse(localStorage.getItem("retailCalculatorData") || "[]")
-    );
-  }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -82,11 +78,8 @@ export function RetailCalculatorForm() {
   };
 
   return (
-    <div className="flex items-center sm:items-start">
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-6 items-center sm:items-start"
-      >
+    <div className="flex flex-col items-center sm:items-start md:flex-row gap-16">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6 items-start">
         <NumberInputField
           id="items"
           name="items"
@@ -151,7 +144,6 @@ export function RetailCalculatorForm() {
           </div>
         )}
       </form>
-      <RetailCalculatorLedger ledgerHistory={ledgerHistory} />
     </div>
   );
 }
